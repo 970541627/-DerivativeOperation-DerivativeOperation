@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Derivative {
 
+public class Derivative {
     private final double DELTA_X = 0.00001;
     private double[] saveResult = new double[2];
     private int in = 0;
@@ -117,7 +117,7 @@ public class Derivative {
                     for (int j = i + 1; j < len; j++) {
                         c = s.charAt(j);
                         if (c == ',') {
-                            saveIndex.add(startRead, digit.toString());
+                            saveIndex.add(startRead, digit.substring(0));
                             s = s.substring(0, i + 1) + s.substring(j + 1);
                             len = s.length();
                             startRead++;
@@ -236,9 +236,11 @@ public class Derivative {
             stack.push(numStack.pop());
         }
         for (int i = 0; i < nSize; i++) {
-            String s1 = (String) stack.pop();
+            StringBuffer s2 = new StringBuffer();
+            s2.append(stack.pop());
+            String s1=s2.substring(0);
             if (s1.matches("^[0-9]+(.[0-9]+)?$")) {
-                numStack.push(Double.parseDouble(s1));
+                numStack.push(Double.parseDouble(s1.toString()));
             } else if (s1.equals("d")) {
                 numStack.push(Math.pow(v, list.get(index)));
                 index++;
